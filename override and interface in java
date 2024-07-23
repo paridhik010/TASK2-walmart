@@ -76,3 +76,27 @@ public class DB2 implements DB {
 public class Data {
     // Data properties and methods
 }
+public class Main {
+    public static void main(String[] args) {
+        Processor processor = new Processor();
+        
+        Mode modeA = new ModeA();
+        Mode modeB = new ModeB();
+        
+        DB db1 = new DB1();
+        DB db2 = new DB2();
+        
+        Data data = new Data();
+        
+        // Configure processor with ModeA and DB1
+        processor.setMode(modeA);
+        processor.setDatabase(db1);
+        processor.processData(data);
+        
+        // Reconfigure processor with ModeB and DB2
+        processor.setMode(modeB);
+        processor.setDatabase(db2);
+        processor.processData(data);
+    }
+}
+
