@@ -1,0 +1,78 @@
+public class Processor {
+    private Mode modeStrategy;
+    private DB databaseStrategy;
+
+    public void setMode(Mode mode) {
+        this.modeStrategy = mode;
+    }
+
+    public void setDatabase(DB db) {
+        this.databaseStrategy = db;
+    }
+
+    public void processData(Data data) {
+        if (modeStrategy != null) {
+            modeStrategy.execute(data);
+        }
+
+        if (databaseStrategy != null) {
+            if (databaseStrategy.validate(data)) {
+                databaseStrategy.save(data);
+            } else {
+                System.out.println("Validation failed.");
+            }
+        }
+    }
+}
+public interface Mode {
+    void execute(Data data);
+}
+public class ModeA implements Mode {
+    @Override
+    public void execute(Data data) {
+        // Process data in ModeA
+        System.out.println("Processing data in ModeA");
+    }
+}
+public class ModeB implements Mode {
+    @Override
+    public void execute(Data data) {
+        // Process data in ModeB
+        System.out.println("Processing data in ModeB");
+    }
+}
+public interface DB {
+    boolean validate(Data data);
+    void save(Data data);
+}
+public class DB1 implements DB {
+    @Override
+    public boolean validate(Data data) {
+        // Validate data against DB1
+        System.out.println("Validating data against DB1");
+        return true; // Assume validation is successful
+    }
+
+    @Override
+    public void save(Data data) {
+        // Save data to DB1
+        System.out.println("Saving data to DB1");
+    }
+}
+public class DB2 implements DB {
+    @Override
+    public boolean validate(Data data) {
+        // Validate data against DB2
+        System.out.println("Validating data against DB2");
+        return true; // Assume validation is successful
+    }
+
+    @Override
+    public void save(Data data) {
+        // Save data to DB2
+        System.out.println("Saving data to DB2");
+    }
+}
+public class Data {
+    // Data properties and methods
+}
